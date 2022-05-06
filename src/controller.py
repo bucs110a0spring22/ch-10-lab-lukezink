@@ -3,6 +3,7 @@ import pygame
 import random
 from src import hero
 from src import enemy
+from src import potion
 
 
 class Controller:
@@ -23,8 +24,11 @@ class Controller:
             x = random.randrange(100, 400)
             y = random.randrange(100, 400)
             self.enemies.add(enemy.Enemy("Boogie", x, y, 'assets/enemy.png'))
+        pot_x = random.randrange(100,400)
+        pot_y = random.randrange(100,400)
+        self.potion = potion.Potion(pot_x,pot_y,"assets/potion.png")
         self.hero = hero.Hero("Conan", 50, 80, "assets/hero.png")
-        self.all_sprites = pygame.sprite.Group((self.hero,) + tuple(self.enemies))
+        self.all_sprites = pygame.sprite.Group((self.hero,) + tuple(self.enemies)+(self.potion,))
         self.state = "GAME"
 
     def mainLoop(self):
@@ -59,7 +63,9 @@ class Controller:
                     else:
                         self.background.fill((250, 0, 0))
                         self.enemies.add(e)
-
+            heals = pygame.sprite.spritecollide(self.hero, self.potion, True)
+          if(heals):
+            self.hero.heal(self)
             # redraw the entire screen
             self.enemies.update()
             self.screen.blit(self.background, (0, 0))

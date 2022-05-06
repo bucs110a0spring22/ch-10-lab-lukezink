@@ -1,5 +1,6 @@
 import pygame
 import random
+
 #model
 class Hero(pygame.sprite.Sprite):
     def __init__(self, name, x, y, img_file):
@@ -7,10 +8,9 @@ class Hero(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
 
         #The following two attributes must be called image and rect
-        #pygame assumes you have intitialized these values
+        #pygame assumes you have initialized these values
         #and uses them to update the screen
-
-        #create surface object image
+      #create surface object image
         self.image = pygame.image.load(img_file).convert_alpha()
         #get the rectangle for positioning
         self.rect = self.image.get_rect()
@@ -39,3 +39,12 @@ class Hero(pygame.sprite.Sprite):
         else:
             print("successful attack")
         return True
+
+    def heal(self):
+      """
+      Increases the hero's health by one
+      Takes a hero
+      Returns nothing
+      """
+        self.health += 1
+        print("Your hero has been healed")
