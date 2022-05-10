@@ -46,5 +46,5 @@ class Hero(pygame.sprite.Sprite):
       Takes a hero
       Returns nothing
       """
-        self.health += 1
-        print("Your hero has been healed")
+      self.health += 1
+      print("Your hero has been healed")
